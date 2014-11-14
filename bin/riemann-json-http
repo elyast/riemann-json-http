@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+
+# Gather statistics from system serving metrics through http as json documents.
+
+require 'riemann/tools'
+
+class Riemann::Tools::HttpJson
+  include Riemann::Tools
+  require 'net/http'
+  require 'rubygems'
+  require 'json'
+
+  opt :http_url, "System metrics url", :default => "http://#{`hostname`.chomp}/metrics"
+  opt :service_name, "Prefix for metrics", :type => :string, :default => nil
+  opt :json_attributes, "json attributes to post to riemann", :type => :strings, :default =>nil
+
+  def initialize
+    @uri = URI(opts[:http_url])
+    @tag = opts[:tag]
+    json_attrs = opts[:json_attributes]
+    @regexps = json_attrs.map {|item| Regexp.new("^#{item}$") }
+    @service_name = opts[:service_name]
+    puts "JSON nodes: #{@regexps.to_s}"
+    puts "Service name: #{@service_name}"
+    puts "URL to try: #{@uri}"
+  end
+
+  def tick
+
+    json = JSON.parse(get_response(@uri))
+    attributes_to_report = filter_attributes(json, @regexps)
+
+    attributes_to_report.each do |key, value|
+      if !value.is_a? Numeric
+        next
+      end
+      name = if @service_name
+        "#{@service_name} #{key}"
+      else
+        key
+      end
+      report(
+         :host    => opts[:event_host],
+         :service => name,
+         :metric  => value.to_f,
+         :state   => "ok"
+      )
+    end
+  end
+
+  def filter_attributes(hash, regexps, parent_name=nil, results = {})
+    hash.each do |key, v|
+      value = v || key
+      new_parent = if parent_name
+        "#{parent_name}.#{key}"
+      else
+        key
+      end
+      if value.is_a?(Hash) || value.is_a?(Array)
+        filter_attributes(value, regexps, new_parent, results)
+      else
+        if matching_node(new_parent, regexps)
+          results[new_parent] = value
+        end
+      end
+    end
+    results
+  end
+
+  def matching_node(name, regexps)
+    regexps.map {|r| name.match(r) }.compact.size > 0
+  end
+
+  def get_response(uri)
+    Net::HTTP.get(uri)
+  end
+end
+
+Riemann::Tools::HttpJson.run
