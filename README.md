@@ -11,5 +11,4 @@ Get started
 ``` bash
 gem install riemann-json-http
 riemann-json-http --help
-riemann-json-http --help
 ```
