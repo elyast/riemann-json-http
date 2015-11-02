@@ -4,4 +4,4 @@ rvm:
 
 install: gem install riemann-tools
 
-script: rake gem
+script: rake build

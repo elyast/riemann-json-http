@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "riemann-json-http"
-  spec.version       = "0.1.3"
+  spec.version       = "0.1.4"
   spec.authors       = ["Lukasz Jastrzebski"]
   spec.email         = ["lukasz.jastrzebski@gmail.com"]
 
