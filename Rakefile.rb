@@ -27,7 +27,7 @@ gemspec = Gem::Specification.new do |s|
   s.executables |= Dir.entries('bin/')
   s.has_rdoc = false
 
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.0.0'
 end
 
 Gem::PackageTask.new gemspec do |p|
