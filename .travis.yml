@@ -1,7 +1,13 @@
 language: ruby
 rvm:
-  - 2.0.0-p247
-
+- 2.0.0-p247
 install: gem install riemann-tools
-
 script: rake gem
+deploy:
+  provider: rubygems
+  api_key:
+    secure: XvtvqQQdk03v3smfBQIyD856EeXp/LnwsHi8Gvsx4vlTkyiVBlI7UIatTUyTLvaehb46vP3pAvVu+ZTsOSRm87Q9DSQW2Pae3ZF8kFLLoBM9lk7Bse93AVU/r+TCpOKEsgj6cwtfC7IBkb9OtLuuEsZsXpa7JWc7CbvUm4k9KuXWC8SEKocrsV8sHaYtUjPpNXrKCs6B/mhXX5Axt2dahyIvAjVngei6rBL4tEP4vJyKXfdcKwnn+ostLwAPux/UgB94/EAO+U1aAz7jse3DzDGp/NIpFeXiBpCsqKJz/PspCZkf9YXEj5x8GmBzq6wh+ikv40WgJavASwJdFMTtYR3Z/pJ3GR3F6aNi1NkaITdodKsLJ6BNnRtlXRZ2qwF7JXXbY0DjHcEnd208d3w0Eh6aAfprgzdPh1LFzi/HEs53+yb6p/O/reMvxc72eiuHirzycEvpz9Mjy0tw3R5Glh1Y5AbwbV0/2I2/NVvTBQD23tQHvpgqDdMSpsl4+qWLiXcxnsxm9oEvQEkav4YSSZs4VjWvSNhO1/TV+OfhpaUgfKliGL4wRmVJ3bruNFXMSsmlsdCADHrphc0Fc+7JuDe0kE4xqqiBqH2HY/c48xDkuFLJ+mpuQ37nxlRlJ/aMKGWGmxow62W/YvhBQpnz25VStG58+YdfIN9cIVpb82Q=
+  gem: riemann-json-http
+  on:
+    tags: true
+    repo: elyast/riemann-json-http

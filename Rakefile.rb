@@ -12,7 +12,7 @@ gemspec = Gem::Specification.new do |s|
   s.rubyforge_project = 'riemann-json-http'
 
   s.name = 'riemann-json-http'
-  s.version = '0.1.2'
+  s.version = '0.1.3'
   s.author = 'Lukasz Jastrzebski'
   s.email = 'lukasz.jastrzebski@gmail.com'
   s.homepage = 'https://github.com/elyast/riemann-json-http'
