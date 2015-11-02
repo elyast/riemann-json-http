@@ -5,12 +5,3 @@ rvm:
 
 install: gem install riemann-tools
 
-deploy:
-  provider: rubygems
-  api_key:
-    secure: ""
-  gem: riemann-json-http
-  on:
-    tags: true
-    repo: elyast/riemann-json-http
-    all_branches: true
