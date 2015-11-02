@@ -20,6 +20,7 @@ gemspec = Gem::Specification.new do |s|
   s.summary = 'Collect stats for system service metrics over http as json documents and submits them to Riemann.'
   s.description = 'Collect stats for system service metrics over http as json documents and submits them to Riemann.'
 
+  s.license       = 'MIT'
   s.add_dependency 'riemann-tools', '~> 0.2', '>= 0.2.1'
 
   s.files = FileList['bin/*', 'README.md'].to_a
