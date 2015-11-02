@@ -14,12 +14,13 @@ gemspec = Gem::Specification.new do |s|
   s.name = 'riemann-json-http'
   s.version = '0.0.1'
   s.author = 'Lukasz Jastrzebski'
-  s.email = 'lukasz.jastrzebski@nsn.com'
+  s.email = 'lukasz.jastrzebski@gmail.com'
   s.homepage = 'https://github.com/elyast/riemann-json-http'
   s.platform = Gem::Platform::RUBY
   s.summary = 'Collect stats for system service metrics over http as json documents and submits them to Riemann.'
+  s.description = 'Collect stats for system service metrics over http as json documents and submits them to Riemann.'
 
-  s.add_dependency 'riemann-tools', '>= 0.2.1'
+  s.add_dependency 'riemann-tools', '~> 0.2', '>= 0.2.1'
 
   s.files = FileList['bin/*', 'README.md'].to_a
   s.executables |= Dir.entries('bin/')
